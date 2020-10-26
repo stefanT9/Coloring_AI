@@ -29,9 +29,23 @@ def find_solution_using_bkt(nodes, nodes_sets, edges):
         idx = len(sol)
         for color in nodes_sets[idx]:
             sol = sol+[color]
+            addBack=[]
+            for edge in edges:
+                if edge[0] == idx:
+                    if color in node_sets[edge[1]]:
+                        node_sets[edge[1]].remove(color)
+                        addBack+=[edge[1],color]
+                elif edge[1] == idx:
+                    if color in node_sets[edge[1]]:
+                        node_sets[edge[0]].remove(color)
+                        addBack+=[edge[0],color]
+
             find_solution_using_bkt(nodes,nodes_sets,edges)
             if stop_flag:
                 break
+
+            for toAdd in addBack:
+                node_sets[toAdd[0]]+=[toAdd[1]]
             sol = sol[:idx]
 
 nodes = [1,2,3,4]
