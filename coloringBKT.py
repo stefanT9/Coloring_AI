@@ -36,7 +36,7 @@ def find_solution_using_bkt(nodes, nodes_sets, edges):
                         node_sets[edge[1]].remove(color)
                         addBack+=[edge[1],color]
                 elif edge[1] == idx:
-                    if color in node_sets[edge[1]]:
+                    if color in node_sets[edge[0]]:
                         node_sets[edge[0]].remove(color)
                         addBack+=[edge[0],color]
 
@@ -48,9 +48,9 @@ def find_solution_using_bkt(nodes, nodes_sets, edges):
                 node_sets[toAdd[0]]+=[toAdd[1]]
             sol = sol[:idx]
 
-nodes = [1,2,3,4]
-node_sets = [[1,2,3,4] for i in range(4)]
-edges = [(1,2),(2,3),(0,3),(1,3)]
+nodes = [1, 2, 3, 4]
+node_sets = [[1, 2], [1, 2], [1, 2, 3], [1, 2, 3, 4]]
+edges = [(0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (2, 3)]
 find_solution_using_bkt(nodes,node_sets,edges)
 
 print(sol)
